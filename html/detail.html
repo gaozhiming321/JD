@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>详情页</title>
+  <link rel="stylesheet" href="../css/reset.css">
+  <style>
+    body {
+      font-size: 0.16rem;
+      background-color: #f7f7f7;
+      padding-bottom: 0.6rem;
+    }
+
+    .detail-swiper {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-viewBox {
+      width: 9999px;
+    }
+
+    .detail-viewBox li {
+      float: left;
+      width: 100vw;
+      height: 100vw;
+    }
+
+    .detail-viewBox li img {
+      width: 100%;
+      height: 100%;
+    }
+
+    .detail-pagination {
+      width: 0.4rem;
+      height: 0.25rem;
+      line-height: 0.25rem;
+      background-color: rgba(0, 0, 0, .5);
+      border-top-left-radius: 0.2rem;
+      border-bottom-left-radius: 0.2rem;
+      color: #fff;
+      position: absolute;
+      right: 0;
+      bottom: 0.2rem;
+      z-index: 9;
+      text-align: center;
+    }
+
+    .currentIndex {
+      font-size: 0.2rem;
+    }
+
+    .intr {
+      margin: 0.1rem 0;
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 0.15rem 0;
+    }
+
+    .intr .price {
+      font-size: 0.25rem;
+      color: #e13732;
+    }
+
+    .intr .price span {
+      font-size: 0.18rem;
+    }
+
+    footer {
+      position: fixed;
+      width: 100%;
+      height: 0.5rem;
+      background-color: #fff;
+      border-top: 1px solid #d3d3d3;
+      left: 0;
+      bottom: 0;
+      display:flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index:9999;
+    }
+
+    footer button {
+      height: 0.4rem;
+      outline: none;
+      border: none;
+      padding: 0 0.4rem;
+      border-radius: 0.4rem;
+      color: #fff;
+      background: linear-gradient(to right, #ff627c, #ff0d0d);
+      margin:0 0.1rem;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <!-- <section class="detail-swiper">
+      <ul class="detail-viewBox clearfix">
+        <li><img src="../images/1-1.jpg" alt=""></li>
+        <li><img src="../images/1-2.jpg" alt=""></li>
+        <li><img src="../images/1-3.jpg" alt=""></li>
+      </ul>
+      <div class="detail-pagination">
+        <span class="current-index">1</span>
+        <span class="total">/3</span>
+      </div>
+    </section>
+    <section class="intr">
+      <h3>海信（Hisense）HZ40E35D 40英寸高清金属背板丰富影视教育资源智能平板液晶电视</h3>
+      <p class="price"><span>￥</span>1139</p>
+    </section>-->
+    <footer> 
+      <button class="cart"><a href="cart.html">购物车</a></button>
+      <button class="add">加入购物车</button>
+    </footer>
+  </main>
+</body>
+<script src="../js/rem.js"></script>
+<script src="../js/zepto.min.js"></script>
+<script>
+  // ! location.search 查询完整的字符串
+  var search = location.search;
+  var pid = search.split("=")[1]
+  console.log(pid);
+  $.ajax({
+    url: "../data/product.json",
+    type: "get",
+    success: function (res) {
+      $.each(res, function (index, item) {
+        if (item.pid == pid) {
+          //判断查询字符串中的pid是否和数据中的商品id是否一致
+          console.log(item);
+          var liStr = "";
+          $.each(item.album, function (index1, item1) {
+            liStr += `<li><img src="${item1}"></li>`
+          })
+
+          var ele = $(`<section class="detail-swiper">
+          <ul class="detail-viewBox clearfix">
+            ${liStr}
+          </ul>
+          <div class="detail-pagination">
+            <span class="current-index">1</span>
+            <span class="total">/${item.album.length}</span>
+          </div>
+        </section>
+        <section class="intr">
+          <h3>${item.title}</h3>
+          <p class="price"><span>￥</span>${item.price}</p>
+        </section>
+        `)
+          $("main").append(ele)
+        }
+      })
+
+      var index = 0;
+      var start;
+      var len = $(".detail-viewBox li").length;
+      var w = parseFloat($(".detail-viewBox li").css("width"))
+      $(".detail-swiper").on("touchstart", function (e) {
+        start = e.targetTouches[0].pageX;
+      })
+      $(".detail-viewBox").on("touchend", function (e) {
+        var end = e.changedTouches[0].pageX;
+        if (start - end > w / 4) {
+          index++;
+          if (index > len - 1) {
+            index = len - 1
+          }
+        } else if (start - end < -w / 4) {
+          index--;
+          if (index < 0) {
+            index = 0
+          }
+        }
+        $(".detail-viewBox").animate({
+          transform: "translateX(" + -index * 6.4 + "rem)"
+        }, 200)
+        $(".detail-pagination .current-index").html(index + 1)
+      })
+      $(".detail-viewBox").on("touchmove", function (e) {
+        var move = e.targetTouches[0].pageX;
+        var moveX = start - move;
+        $(".detail-viewBox").css({
+          transform: "translateX(" + (-index * w - moveX) + "px)"
+        })
+      })
+    }
+  })
+
+  $(".add").on("touchstart", function (e) {
+    var l = localStorage;
+    //存储商品的id
+    l.setItem("id" + pid, pid);
+    //存储数量
+    if (l.getItem("id" + pid + "num")) {
+      //判断本地存储里是否有对应的这条商品的数量,如果有,就用原来的值自增,如果没有就设设置为1.
+      var num = l.getItem("id" + pid + "num");
+      l.setItem("id" + pid + "num", ++num)
+    } else {
+      l.setItem("id" + pid + "num", 1)
+    }
+
+  })
+</script>
+
+</html>

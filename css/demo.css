@@ -1,0 +1,354 @@
+body {
+  background-color: #f6f6f6;
+  font-size: 0.16rem;
+  background-image: url(../images/headerbg.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  /* min-height: 100vh; */
+  /* height: 100rem; */
+  /* background-size: cover; */
+  /* height:100rem; */
+}
+
+/* 头部开始 */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 45px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+  background-color: transparent;
+  background-color: #e43130;
+}
+
+header .menu a {
+  display: block;
+}
+
+header .menu {
+  margin-left: 0.1rem;
+}
+
+header .menu p {
+  width: 25px;
+  height: 25px;
+  background-image: url(../images/menu.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+header .search {
+  width: 5.0rem;
+  position: relative;
+}
+
+header .search>div {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+header .search input {
+  border: 0;
+  outline: none;
+  width: 100%;
+  height: 30px;
+  border-radius: 30px;
+  text-indent: 75px;
+}
+
+.sprites {
+  background-image: url(../images/jd-sprites.png);
+  background-repeat: no-repeat;
+  display: inline-block;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 30px;
+  background-position: 0 0;
+  transform: scale(.5);
+  position: relative;
+}
+
+.logo-icon::after {
+  position: absolute;
+  content: "";
+  width: 1px;
+  height: 30px;
+  background-color: #999;
+  right: -20px;
+}
+
+.search-icon {
+  width: 30px;
+  height: 30px;
+  background-position: -245px 0;
+  transform: scale(.5);
+}
+
+.login {
+  background-color: transparent;
+  border: 0;
+  outline: none;
+  color: #fff;
+  margin-right: 0.1rem;
+  width: 40px;
+  font-size:0.14rem;
+}
+
+/* 头部结束 */
+
+/* 主体开始 */
+main {
+  width: 6.1rem;
+  margin: 0 auto;
+  padding-top: calc(45px + 0.26rem);
+
+}
+
+/* 轮播开始 */
+.banner {
+  width: 100%;
+  height: 2rem;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.viewBox {
+  width: 9999px;
+  transform: translateX(-6.3rem);
+}
+
+.viewBox li {
+  width: 6.1rem;
+  height: 2rem;
+  float: left;
+  margin-right: 0.2rem;
+}
+
+.viewBox li img {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+.pagination span {
+  float: left;
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, .6);
+  margin: 0 0.025rem;
+}
+
+.pagination span.active {
+  background-color: #e43130;
+}
+
+.pagination {
+  position: absolute;
+  bottom: 0.2rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* 活动展示页面开始 */
+.showBox {
+  display: flex;
+}
+
+.show-small p {
+  width: 1.1rem;
+  height: 0.9rem;
+  background-size: cover;
+  position: relative;
+  color: #fff;
+  text-align: center;
+  position: relative;
+  margin-bottom: 0.15rem;
+}
+
+.show-small p span {
+  position: absolute;
+  width: 100%;
+  bottom: 0.05rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.10rem;
+}
+
+.show-small .p1 {
+  background-image: url(../images/show-bg1.png)
+}
+
+.show-small .p2 {
+  background-image: url(../images/show-bg1.png)
+}
+
+.show-small .p3 {
+  background-image: url(../images/show-bg3.png)
+}
+
+.show-small .p4 {
+  background-image: url(../images/show-bg3.png)
+}
+
+.show-small p img {
+  width: 70%;
+  height: 70%;
+  position: absolute;
+  left: 0.2rem;
+  top: 0.05rem;
+  z-index: -1;
+}
+
+.show-center {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  flex-grow: 1;
+  background-image: url(../images/show-center.gif);
+  background-size: 100% 100%;
+
+}
+
+.show-center p {
+  width: 1.56rem;
+  height: 1.16rem;
+  position: relative;
+}
+
+.show-center p img {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+  top: 0.4rem;
+}
+
+/* 活动展示页面结束 */
+/* icon展示区域开始 */
+.icon-swiper {
+  height: 2.3rem;
+  background-color: #fff;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.icon-viewBox {
+  width: 9999px;
+  height: 2.3rem;
+}
+
+.icon-viewBox ul {
+  float: left;
+  width: 6.1rem;
+  height: 100%;
+}
+
+.icon-viewBox ul li {
+  float: left;
+  color: #8b8b8b;
+  width: 20%;
+  text-align: center;
+  margin: 0.1rem 0;
+}
+
+.icon-viewBox ul li img {
+  width: 0.6rem;
+  height: 0.55rem;
+}
+
+.icon-pagination span {
+  width: 0.1rem;
+  height: 0.1rem;
+  border-radius: 50%;
+  float: left;
+  margin: 0 0.025rem;
+  background-color: #c4c4c4;
+}
+
+.icon-pagination span.active {
+  background-color: #f1261d;
+}
+
+.icon-pagination {
+  position: absolute;
+  left: 50%;
+  bottom: 0.1rem;
+  transform: translateX(-50%)
+}
+/* icon展示区域结束 */
+
+.guess{
+  margin-top:0.15rem;
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+}
+.guess .product-item{
+  width: 3rem;
+  border-radius:10px;
+  background-color: #fff;
+  margin-bottom:0.1rem;
+  overflow:hidden;
+}
+.guess .product-item a{
+  display:block;
+}
+.product-item .item-img img{
+  width: 3rem;
+  height: 3rem;
+}
+.product-item .item-intr h3{
+  height: 0.5rem;
+  width:3rem;
+  font-weight:normal;
+  overflow:hidden;
+  line-height:0.25rem;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
+
+.product-item .item-intr h3  img{
+  float:left;
+  width: 0.5rem;
+  height: 0.16rem;
+  margin-top:0.045rem;
+  margin-right:0.05rem;
+}
+.product-item .item-intr h3  img[src=" "]{
+  display: none;
+}
+.product-item .item-intr .price{
+  color:#e43130;
+  font-size: 0.18rem;
+  margin:0.1rem 0;
+}
+
+/* 轮播结束 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 主体结束 */
